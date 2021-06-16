@@ -3,7 +3,7 @@ This is the template to use for the C# commercial controller. In the Commercial_
 
 ### Installation
 
-As long as you have .NET 5.0 installed on your computer, nothing more needs to be installed:
+As long as you have **.NET 5.0** installed on your computer, nothing more needs to be installed:
 
 The code to run the scenarios is included in the Commercial_Controller folder, and can be executed there with:
 
