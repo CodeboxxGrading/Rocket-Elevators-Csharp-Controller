@@ -50,7 +50,7 @@ namespace Commercial_Controller.Tests
 
             Assert.AreEqual(chosenColumn.ID, expectedColumn.ID, "Wrong column selected, expected Column " + expectedColumn.ID + ", got Column " + chosenColumn.ID);
 
-            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + expectedElevator.ID);
+            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + chosenElevator.ID);
 
             Assert.IsTrue(chosenElevator.completedRequestsList.Contains(userPosition), "No elevator was sent to pick up the user");
 
@@ -75,7 +75,7 @@ namespace Commercial_Controller.Tests
             int destination = 1;
             int[] expectedFinalPositions = { 1, 60, 58, 54, 1 };
 
-            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + expectedElevator.ID);
+            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + chosenElevator.ID);
 
             Assert.IsTrue(chosenElevator.completedRequestsList.Contains(userPosition), "No elevator was sent to pick up the user");
 
@@ -100,7 +100,7 @@ namespace Commercial_Controller.Tests
             int destination = 1;
             int[] expectedFinalPositions = { -4, 1, -5, 1, -6 };
 
-            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + expectedElevator.ID);
+            Assert.AreEqual(chosenElevator.ID, expectedElevator.ID, "Wrong elevator selected, expected Elevator " + expectedElevator.ID + ", got Elevator " + chosenElevator.ID);
 
             Assert.IsTrue(chosenElevator.completedRequestsList.Contains(userPosition), "No elevator was sent to pick up the user");
 
