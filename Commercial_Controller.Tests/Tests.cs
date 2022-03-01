@@ -5,6 +5,14 @@ namespace Commercial_Controller.Tests
     [TestClass]
     public class UnitTest1
     {
+
+        public void AssertElevatorsPosition(Column chosenColumn, int[] expectedFinalPositions) {
+            for (int i = 0; i < chosenColumn.elevatorsList.Count; i++)
+            {
+                Assert.AreEqual(chosenColumn.elevatorsList[i].currentFloor, expectedFinalPositions[i], "Elevator " + chosenColumn.elevatorsList[i].ID + " didn't finish at the correct floor, expected " + expectedFinalPositions[i] + ", got " + chosenColumn.elevatorsList[0].currentFloor);
+            }
+        }
+
         [TestMethod]
 
         public void TestScenario1()
