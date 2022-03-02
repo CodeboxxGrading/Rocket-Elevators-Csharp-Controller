@@ -1,18 +1,46 @@
 using System;
+using System.Collections.Generic;
 
 namespace Commercial_Controller
 {
+    public class ElevatorDetails {
+        public int floor;
+        public string direction;
+        public string status;
+        public List<int> floorRequests;
+
+        public ElevatorDetails(int _floor,string _direction,string _status, List<int> _floorRequests) {
+            this.floor = _floor;
+            this.direction = _direction;
+            this.status = _status;
+            this.floorRequests = _floorRequests;
+        }
+    }
     public class Scenarios
     {
         Battery battery = new Battery(1, 4, 60, 6, 5);
 
         public Column moveAllElevators(Column column) {
+            
             for (int i = 0; i < column.elevatorsList.Count; i++)
             {
+               
                 while (column.elevatorsList[i].floorRequestsList.Count != 0)
                 {
+                     Console.WriteLine(column.elevatorsList[i].currentFloor);
                     column.elevatorsList[i].move();
                 }
+            }
+            return column;
+        }
+
+        public Column setupElevators(Column column, List<ElevatorDetails> elevatorDetails) {
+            for (int i = 0; i < column.elevatorsList.Count; i++)
+            {
+                column.elevatorsList[i].currentFloor = elevatorDetails[i].floor;
+                column.elevatorsList[i].direction = elevatorDetails[i].direction;
+                column.elevatorsList[i].status = elevatorDetails[i].status;
+                column.elevatorsList[i].floorRequestsList = elevatorDetails[i].floorRequests;
             }
             return column;
         }
@@ -21,30 +49,13 @@ namespace Commercial_Controller
         {
             Column column = battery.columnsList[1];
 
-            column.elevatorsList[0].currentFloor = 20;
-            column.elevatorsList[0].direction = "down";
-            column.elevatorsList[0].status = "moving";
-            column.elevatorsList[0].floorRequestsList.Add(5);
-
-            column.elevatorsList[1].currentFloor = 3;
-            column.elevatorsList[1].direction = "up";
-            column.elevatorsList[1].status = "moving";
-            column.elevatorsList[1].floorRequestsList.Add(15);
-
-            column.elevatorsList[2].currentFloor = 13;
-            column.elevatorsList[2].direction = "down";
-            column.elevatorsList[2].status = "moving";
-            column.elevatorsList[2].floorRequestsList.Add(1);
-
-            column.elevatorsList[3].currentFloor = 15;
-            column.elevatorsList[3].direction = "down";
-            column.elevatorsList[3].status = "moving";
-            column.elevatorsList[3].floorRequestsList.Add(2);
-
-            column.elevatorsList[4].currentFloor = 6;
-            column.elevatorsList[4].direction = "down";
-            column.elevatorsList[4].status = "moving";
-            column.elevatorsList[4].floorRequestsList.Add(2);
+            ElevatorDetails elevator1 = new ElevatorDetails(20,"down","moving", new List<int>{5});
+            ElevatorDetails elevator2 = new ElevatorDetails(3,"up","moving",  new List<int>{15});
+            ElevatorDetails elevator3 = new ElevatorDetails(13,"down","moving",new List<int>{1});
+            ElevatorDetails elevator4 = new ElevatorDetails(15,"down","moving", new List<int>{2});
+            ElevatorDetails elevator5 = new ElevatorDetails(6,"down","moving", new List<int>{2});
+            List<ElevatorDetails> elevatorDetails = new List<ElevatorDetails>{elevator1,elevator2,elevator3,elevator4,elevator5};
+            battery.columnsList[1] = setupElevators(column, elevatorDetails);
 
             (Column chosenColumn, Elevator chosenElevator) = battery.assignElevator(20, "up");
             chosenColumn = moveAllElevators(chosenColumn);
@@ -54,30 +65,13 @@ namespace Commercial_Controller
         {
             Column column = battery.columnsList[2];
 
-            column.elevatorsList[0].currentFloor = 1;
-            column.elevatorsList[0].direction = "up";
-            column.elevatorsList[0].status = "stopped";
-            column.elevatorsList[0].floorRequestsList.Add(21);
-
-            column.elevatorsList[1].currentFloor = 23;
-            column.elevatorsList[1].direction = "up";
-            column.elevatorsList[1].status = "moving";
-            column.elevatorsList[1].floorRequestsList.Add(28);
-
-            column.elevatorsList[2].currentFloor = 33;
-            column.elevatorsList[2].direction = "down";
-            column.elevatorsList[2].status = "moving";
-            column.elevatorsList[2].floorRequestsList.Add(1);
-
-            column.elevatorsList[3].currentFloor = 40;
-            column.elevatorsList[3].direction = "down";
-            column.elevatorsList[3].status = "moving";
-            column.elevatorsList[3].floorRequestsList.Add(24);
-
-            column.elevatorsList[4].currentFloor = 39;
-            column.elevatorsList[4].direction = "down";
-            column.elevatorsList[4].status = "moving";
-            column.elevatorsList[4].floorRequestsList.Add(1);
+            ElevatorDetails elevator1 = new ElevatorDetails(1,"up","stopped", new List<int>{21});
+            ElevatorDetails elevator2 = new ElevatorDetails(23,"up","moving",  new List<int>{28});
+            ElevatorDetails elevator3 = new ElevatorDetails(33,"down","moving",new List<int>{1});
+            ElevatorDetails elevator4 = new ElevatorDetails(40,"down","moving", new List<int>{24});
+            ElevatorDetails elevator5 = new ElevatorDetails(39,"down","moving", new List<int>{1});
+            List<ElevatorDetails> elevatorDetails = new List<ElevatorDetails>{elevator1,elevator2,elevator3,elevator4,elevator5};
+            battery.columnsList[2] = setupElevators(column, elevatorDetails);
 
             (Column chosenColumn, Elevator chosenElevator) = battery.assignElevator(36, "up");
             chosenColumn = moveAllElevators(chosenColumn);
@@ -87,32 +81,14 @@ namespace Commercial_Controller
         {
             Column column = battery.columnsList[3];
 
-            column.elevatorsList[0].currentFloor = 58;
-            column.elevatorsList[0].direction = "down";
-            column.elevatorsList[0].status = "moving";
-            column.elevatorsList[0].floorRequestsList.Add(1);
+            ElevatorDetails elevator1 = new ElevatorDetails(58,"down","moving", new List<int>{1});
+            ElevatorDetails elevator2 = new ElevatorDetails(50,"up","moving",  new List<int>{60});
+            ElevatorDetails elevator3 = new ElevatorDetails(46,"up","moving",new List<int>{58});
+            ElevatorDetails elevator4 = new ElevatorDetails(1,"up","moving", new List<int>{54});
+            ElevatorDetails elevator5 = new ElevatorDetails(60,"down","moving", new List<int>{1});
+            List<ElevatorDetails> elevatorDetails = new List<ElevatorDetails>{elevator1,elevator2,elevator3,elevator4,elevator5};
+            setupElevators(column, elevatorDetails);
 
-            column.elevatorsList[1].currentFloor = 50;
-            column.elevatorsList[1].direction = "up";
-            column.elevatorsList[1].status = "moving";
-            column.elevatorsList[1].floorRequestsList.Add(60);
-
-            column.elevatorsList[2].currentFloor = 46;
-            column.elevatorsList[2].direction = "up";
-            column.elevatorsList[2].status = "moving";
-            column.elevatorsList[2].floorRequestsList.Add(58);
-
-            column.elevatorsList[3].currentFloor = 1;
-            column.elevatorsList[3].direction = "up";
-            column.elevatorsList[3].status = "moving";
-            column.elevatorsList[3].floorRequestsList.Add(54);
-
-            column.elevatorsList[4].currentFloor = 60;
-            column.elevatorsList[4].direction = "down";
-            column.elevatorsList[4].status = "moving";
-            column.elevatorsList[4].floorRequestsList.Add(1);
-
-            //We make the request
             Elevator chosenElevator = column.requestElevator(54, "down");
             column = moveAllElevators(column);
             return (column, chosenElevator);
@@ -121,26 +97,14 @@ namespace Commercial_Controller
         {
             Column column = battery.columnsList[0];
 
-            column.elevatorsList[0].currentFloor = -4;
+            ElevatorDetails elevator1 = new ElevatorDetails(-4,null,"idle",  new List<int>());
+            ElevatorDetails elevator2 = new ElevatorDetails(1,null,"idle",  new List<int>());
+            ElevatorDetails elevator3 = new ElevatorDetails(-3,"down","moving",new List<int>{-5});
+            ElevatorDetails elevator4 = new ElevatorDetails(-6,"up","moving", new List<int>{1});
+            ElevatorDetails elevator5 = new ElevatorDetails(-1,"down","moving", new List<int>{-6});
+            List<ElevatorDetails> elevatorDetails = new List<ElevatorDetails>{elevator1,elevator2,elevator3,elevator4,elevator5};
+            setupElevators(column, elevatorDetails);
 
-            column.elevatorsList[1].currentFloor = 1;
-
-            column.elevatorsList[2].currentFloor = -3;
-            column.elevatorsList[2].direction = "down";
-            column.elevatorsList[2].status = "moving";
-            column.elevatorsList[2].floorRequestsList.Add(-5);
-
-            column.elevatorsList[3].currentFloor = -6;
-            column.elevatorsList[3].direction = "up";
-            column.elevatorsList[3].status = "moving";
-            column.elevatorsList[3].floorRequestsList.Add(1);
-
-            column.elevatorsList[4].currentFloor = -1;
-            column.elevatorsList[4].direction = "down";
-            column.elevatorsList[4].status = "moving";
-            column.elevatorsList[4].floorRequestsList.Add(-6);
-
-            //We make the request
             Elevator chosenElevator = column.requestElevator(-3, "up");
             column = moveAllElevators(column);
             return (column, chosenElevator);
